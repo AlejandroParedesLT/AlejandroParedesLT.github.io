@@ -1,0 +1,7 @@
+{{- $file := .Get "file" -}}
+{{- $path := printf "content/%s" $file -}}
+{{- with readFile $path }}
+{{ . | safeHTML }}
+{{- else }}
+<p><strong>⚠ File not found:</strong> {{ $path }}</p>
+{{- end -}}

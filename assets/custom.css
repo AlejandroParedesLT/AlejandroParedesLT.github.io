@@ -1,0 +1,9 @@
+.single .content {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+iframe, .plotly-graph-div {
+  width: 100% !important;
+  height: auto !important;
+}

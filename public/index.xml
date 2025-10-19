@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Alejandro Paredes La Torre</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on Alejandro Paredes La Torre</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 19 Oct 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Understanding SHAP Values: From Theory to Implementation</title>
+      <link>http://localhost:1313/posts/shapely-values/</link>
+      <pubDate>Sun, 19 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/shapely-values/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;pizza_shapley_story.gif&#34; alt=&#34;Pizza Shapley Animation&#34;&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;strong&gt;TL;DR&lt;/strong&gt; — SHAP (SHapley Additive exPlanations) is a principled framework for interpreting ML predictions. By borrowing ideas from cooperative game theory, SHAP quantifies the contribution of each feature for a given prediction. In this guide, we’ll unpack the math, intuition, and practical implementation.&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;1-motivation--why-interpretability-matters&#34;&gt;1. Motivation — Why Interpretability Matters&lt;/h2&gt;&#xA;&lt;p&gt;Modern machine learning models are increasingly complex, think ensembles, gradient boosting, or deep neural networks. Without interpretability, these models are &lt;strong&gt;black boxes&lt;/strong&gt;. Understanding &lt;em&gt;why&lt;/em&gt; a model makes a prediction is essential for:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

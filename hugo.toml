@@ -1,0 +1,16 @@
+baseURL = 'https://alejandroparedeslt.github.io/'
+languageCode = 'en-us'
+title = 'Alejandro Paredes La Torre'
+theme = 'ananke'
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = [['\[', '\]'], ['$$', '$$']]
+          inline = [['\(', '\)']]
+[params]
+  math = true

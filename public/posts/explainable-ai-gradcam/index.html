@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Understanding SHAP Values: From Theory to Implementation | Alejandro Paredes La Torre</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="A complete guide to SHAP values — how they work, why they matter, and how to implement them in practice for model interpretability.">
+    <meta name="generator" content="Hugo 0.151.2">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="Alejandro Paredes">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+
+    
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://localhost:1313/posts/explainable-ai-gradcam/">
+    
+
+    <meta property="og:url" content="http://localhost:1313/posts/explainable-ai-gradcam/">
+  <meta property="og:site_name" content="Alejandro Paredes La Torre">
+  <meta property="og:title" content="Understanding SHAP Values: From Theory to Implementation">
+  <meta property="og:description" content="A complete guide to SHAP values — how they work, why they matter, and how to implement them in practice for model interpretability.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-10-19T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-10-19T00:00:00+00:00">
+    <meta property="article:tag" content="Explainable-Ai">
+    <meta property="article:tag" content="Shap">
+    <meta property="article:tag" content="Machine-Learning">
+    <meta property="article:tag" content="Model-Interpretability">
+
+  <meta itemprop="name" content="Understanding SHAP Values: From Theory to Implementation">
+  <meta itemprop="description" content="A complete guide to SHAP values — how they work, why they matter, and how to implement them in practice for model interpretability.">
+  <meta itemprop="datePublished" content="2025-10-19T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2025-10-19T00:00:00+00:00">
+  <meta itemprop="wordCount" content="1049">
+  <meta itemprop="keywords" content="Explainable-Ai,Shap,Machine-Learning,Model-Interpretability">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Understanding SHAP Values: From Theory to Implementation">
+  <meta name="twitter:description" content="A complete guide to SHAP values — how they work, why they matter, and how to implement them in practice for model interpretability.">
+
+	
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        Alejandro Paredes La Torre
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked ttu">
+          
+        Posts
+      </aside><div id="sharing" class="mt3 ananke-socials"></div>
+<h1 class="f1 athelas mt3 mb1">Understanding SHAP Values: From Theory to Implementation</h1>
+      
+      <p class="tracked"><strong>Alejandro Paredes</strong>
+      </p>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2025-10-19T00:00:00Z">October 19, 2025</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><blockquote>
+<p><strong>TL;DR</strong> — SHAP (SHapley Additive exPlanations) is a principled framework for interpreting ML predictions. By borrowing ideas from cooperative game theory, SHAP quantifies the contribution of each feature for a given prediction. In this guide, we’ll unpack the math, intuition, and practical implementation.</p>
+</blockquote>
+<blockquote>
+<p>Some of the contents present in this blog have been created with the assistance of GPT-5. Reach out to me if you think there are inaccuracies.</p>
+</blockquote>
+<hr>
+<h2 id="1-motivation--why-interpretability-matters">1. Motivation — Why Interpretability Matters</h2>
+<p>Modern machine learning models are increasingly complex, think ensembles, gradient boosting, or deep neural networks. Without interpretability, these models are <strong>black boxes</strong>. Understanding <em>why</em> a model makes a prediction is essential for:</p>
+<ul>
+<li>Building trust with stakeholders</li>
+<li>Debugging bias or overfitting</li>
+<li>Complying with regulatory standards (e.g., GDPR)</li>
+</ul>
+<p>SHAP provides a <strong>unified and theoretically sound</strong> way to measure feature contributions for any prediction.</p>
+<hr>
+<h2 id="2-the-game-theory-behind-shap">2. The Game Theory Behind SHAP</h2>
+<h3 id="21-shapley-values">2.1 Shapley Values</h3>
+<p>In cooperative game theory, the <strong>Shapley value</strong> distributes a total &ldquo;payout&rdquo; fairly among players according to their contributions. Formally, for a set of players ( N = {1, 2, &hellip;, n} ) and a value function ( v(S) ) representing the payout for a coalition ( S \subseteq N ):</p>
+<p>[
+\phi_i(v) = \sum_{S \subseteq N \setminus {i}} \frac{|S|!(n-|S|-1)!}{n!} \Big[ v(S \cup {i}) - v(S) \Big]
+]</p>
+<p>Where:</p>
+<ul>
+<li>( \phi_i(v) ) is the Shapley value for player ( i )</li>
+<li>( v(S) ) is the payout from coalition ( S )</li>
+</ul>
+<p>Intuition: It’s the <strong>average marginal contribution</strong> of player ( i ) across all possible coalitions.</p>
+<h3 id="22-translating-to-machine-learning">2.2 Translating to Machine Learning</h3>
+<ul>
+<li><strong>Players</strong> → input features</li>
+<li><strong>Coalitions</strong> → subsets of features considered by the model</li>
+<li><strong>Payouts</strong> → model predictions (or probabilities, log-odds, etc.)</li>
+</ul>
+<p>In SHAP, we treat each feature as a &ldquo;player&rdquo; and compute its average contribution to the model output, ensuring a <strong>fair and consistent attribution</strong>.</p>
+<hr>
+<h2 id="3-additive-explanation-model">3. Additive Explanation Model</h2>
+<p>SHAP expresses a model&rsquo;s output as an <strong>additive combination</strong> of feature contributions:</p>
+<p>[
+f(x) = \phi_0 + \sum_{i=1}^{M} \phi_i
+]</p>
+<p>Where:</p>
+<ul>
+<li>( \phi_0 ) = base value (expected model output)</li>
+<li>( \phi_i ) = contribution of feature ( i )</li>
+<li>( f(x) ) = prediction for sample ( x )</li>
+</ul>
+<p>This decomposition satisfies three key properties:</p>
+<ol>
+<li><strong>Local accuracy</strong> — the sum of SHAP values equals the model output</li>
+<li><strong>Missingness</strong> — features not in the model have zero attribution</li>
+<li><strong>Consistency</strong> — if a model changes so a feature’s contribution increases, its SHAP value does not decrease</li>
+</ol>
+<p>These properties make SHAP a robust tool for interpretable ML.</p>
+<hr>
+<h2 id="4-implementation-breakdown">4. Implementation Breakdown</h2>
+<h3 id="41-computing-shap-values-conceptually">4.1 Computing SHAP Values (Conceptually)</h3>
+<p>Computing exact Shapley values requires evaluating all ( 2^n ) feature subsets — quickly infeasible for large models.</p>
+<p>SHAP uses <strong>model-specific approximations</strong>:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Model Type</th>
+          <th>SHAP Method</th>
+          <th>Complexity</th>
+          <th>Notes</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Tree-based</td>
+          <td>TreeSHAP</td>
+          <td>Polynomial</td>
+          <td>Exact for trees</td>
+      </tr>
+      <tr>
+          <td>Linear</td>
+          <td>LinearSHAP</td>
+          <td>Linear</td>
+          <td>Closed-form solution</td>
+      </tr>
+      <tr>
+          <td>Deep learning</td>
+          <td>DeepSHAP</td>
+          <td>Approximate</td>
+          <td>Uses layer-wise relevance propagation</td>
+      </tr>
+      <tr>
+          <td>Model-agnostic</td>
+          <td>KernelSHAP</td>
+          <td>Approximate</td>
+          <td>Weighted linear regression</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-case-study-understanding-recidivism-risk-with-shap">⚖️ Case Study: Understanding Recidivism Risk with SHAP</h2>
+<p>TreeSHAP efficiently distributes credit along tree paths, caching intermediate results to avoid exponential computation.</p>
+<h3 id="-scenario">🔍 Scenario</h3>
+<p>Malik Johnson, a 27-year-old with one prior felony, was flagged as <strong>low risk</strong> by an AI risk assessment tool and granted parole. Some community stakeholders have questioned whether this classification was appropriate.</p>
+<p>We’ll use <strong>SHAP values</strong> to unpack the model’s reasoning and show which factors influenced this decision.</p>
+<p>We use the <strong>COMPAS dataset</strong>, which tracks recidivism risk for individuals.</p>
+<details>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> train_test_split
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.ensemble <span style="color:#f92672">import</span> RandomForestClassifier
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Load dataset</span>
+</span></span><span style="display:flex;"><span>url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://raw.githubusercontent.com/propublica/compas-analysis/master/compas-scores-two-years.csv&#34;</span>
+</span></span><span style="display:flex;"><span>df_compas <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(url)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Select features and target</span>
+</span></span><span style="display:flex;"><span>features <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;age&#39;</span>, <span style="color:#e6db74">&#39;sex&#39;</span>, <span style="color:#e6db74">&#39;race&#39;</span>, <span style="color:#e6db74">&#39;priors_count&#39;</span>, <span style="color:#e6db74">&#39;juv_fel_count&#39;</span>, <span style="color:#e6db74">&#39;juv_misd_count&#39;</span>, <span style="color:#e6db74">&#39;juv_other_count&#39;</span>, <span style="color:#e6db74">&#39;c_charge_degree&#39;</span>]
+</span></span><span style="display:flex;"><span>df <span style="color:#f92672">=</span> df_compas[features <span style="color:#f92672">+</span> [<span style="color:#e6db74">&#39;two_year_recid&#39;</span>]]<span style="color:#f92672">.</span>dropna()
+</span></span><span style="display:flex;"><span>df <span style="color:#f92672">=</span> df[df[<span style="color:#e6db74">&#39;c_charge_degree&#39;</span>]<span style="color:#f92672">.</span>isin([<span style="color:#e6db74">&#39;F&#39;</span>, <span style="color:#e6db74">&#39;M&#39;</span>])]  <span style="color:#75715e"># Felony or Misdemeanor</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Encode categorical variables</span>
+</span></span><span style="display:flex;"><span>df[<span style="color:#e6db74">&#39;sex&#39;</span>] <span style="color:#f92672">=</span> df[<span style="color:#e6db74">&#39;sex&#39;</span>]<span style="color:#f92672">.</span>astype(<span style="color:#e6db74">&#39;category&#39;</span>)<span style="color:#f92672">.</span>cat<span style="color:#f92672">.</span>codes
+</span></span><span style="display:flex;"><span>df[<span style="color:#e6db74">&#39;race&#39;</span>] <span style="color:#f92672">=</span> df[<span style="color:#e6db74">&#39;race&#39;</span>]<span style="color:#f92672">.</span>astype(<span style="color:#e6db74">&#39;category&#39;</span>)<span style="color:#f92672">.</span>cat<span style="color:#f92672">.</span>codes
+</span></span><span style="display:flex;"><span>df[<span style="color:#e6db74">&#39;c_charge_degree&#39;</span>] <span style="color:#f92672">=</span> df[<span style="color:#e6db74">&#39;c_charge_degree&#39;</span>]<span style="color:#f92672">.</span>astype(<span style="color:#e6db74">&#39;category&#39;</span>)<span style="color:#f92672">.</span>cat<span style="color:#f92672">.</span>codes
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Train-test split</span>
+</span></span><span style="display:flex;"><span>X <span style="color:#f92672">=</span> df[features]
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> df[<span style="color:#e6db74">&#39;two_year_recid&#39;</span>]
+</span></span><span style="display:flex;"><span>X_train, X_test, y_train, y_test <span style="color:#f92672">=</span> train_test_split(X, y, test_size<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Train a Random Forest model</span>
+</span></span><span style="display:flex;"><span>model_compas <span style="color:#f92672">=</span> RandomForestClassifier(random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>model_compas<span style="color:#f92672">.</span>fit(X_train, y_train)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>focus_instance <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame([{
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;age&#34;</span>: <span style="color:#ae81ff">27</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;sex&#34;</span>: <span style="color:#ae81ff">1</span>,  <span style="color:#75715e"># Male</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;race&#34;</span>: <span style="color:#ae81ff">1</span>,  <span style="color:#75715e"># African-American</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;priors_count&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;juv_fel_count&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;juv_misd_count&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;juv_other_count&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;c_charge_degree&#34;</span>: <span style="color:#ae81ff">1</span>  <span style="color:#75715e"># Felony</span>
+</span></span><span style="display:flex;"><span>}])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>pred <span style="color:#f92672">=</span> model_compas<span style="color:#f92672">.</span>predict(focus_instance)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Prediction for Malik Johnson:&#34;</span>, pred)
+</span></span></code></pre></div></details>
+<h3 id="focused-prediction-malik-johnson">Focused Prediction: Malik Johnson</h3>
+<blockquote>
+<p>The Machine learning model predicts <strong>no recidivism risk</strong>.</p>
+</blockquote>
+<hr>
+<h3 id="computing-shap-values">Computing SHAP Values</h3>
+<details>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> shap
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Sample background data</span>
+</span></span><span style="display:flex;"><span>X_background <span style="color:#f92672">=</span> shap<span style="color:#f92672">.</span>utils<span style="color:#f92672">.</span>sample(X_train, <span style="color:#ae81ff">100</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create TreeExplainer</span>
+</span></span><span style="display:flex;"><span>explainer <span style="color:#f92672">=</span> shap<span style="color:#f92672">.</span>TreeExplainer(model_compas, X_background)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># SHAP values for the focus instance</span>
+</span></span><span style="display:flex;"><span>shap_values_focus <span style="color:#f92672">=</span> explainer(focus_instance)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># SHAP values for the test set (for global insights)</span>
+</span></span><span style="display:flex;"><span>shap_values_test <span style="color:#f92672">=</span> explainer(X_test)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>shap<span style="color:#f92672">.</span>plots<span style="color:#f92672">.</span>waterfall(shap_values_focus[<span style="color:#ae81ff">0</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>shap<span style="color:#f92672">.</span>plots<span style="color:#f92672">.</span>force(shap_values_focus[<span style="color:#ae81ff">0</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>shap<span style="color:#f92672">.</span>plots<span style="color:#f92672">.</span>summary(shap_values_test, X_test)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>shap<span style="color:#f92672">.</span>plots<span style="color:#f92672">.</span>dependence(<span style="color:#e6db74">&#34;priors_count&#34;</span>, shap_values_test, X_test)
+</span></span></code></pre></div></details>
+<hr>
+<h3 id="visualizing-shap-values">Visualizing SHAP Values</h3>
+<h4 id="a-waterfall-plot--individual-prediction">a) Waterfall Plot – Individual Prediction</h4>
+<p><img src="/images/shap_waterfall.png" alt="SHAP Waterfall Plot"></p>
+<ul>
+<li>Shows <strong>how each feature pushed the prediction up or down</strong>.</li>
+<li>For Malik, <strong>low priors_count</strong> and <strong>age</strong> contributed most to the low-risk prediction.</li>
+<li>SHAP values <strong>sum exactly</strong> to the predicted outcome, ensuring no feature’s effect is unaccounted for.</li>
+</ul>
+<hr>
+<h4 id="b-force-plot--interactive-explanation">b) Force Plot – Interactive Explanation</h4>
+<ul>
+<li>Visualizes contributions as <strong>forces pushing the prediction higher or lower</strong>.</li>
+<li>Red arrows push toward recidivism; blue arrows push toward no recidivism.</li>
+<li>Very intuitive for <strong>non-technical stakeholders</strong>.</li>
+</ul>
+<hr>
+<h4 id="c-summary-plot--global-feature-importance">c) Summary Plot – Global Feature Importance</h4>
+<ul>
+<li>Shows <strong>which features influence predictions across the dataset</strong>.</li>
+<li>For example, <code>priors_count</code> and <code>age</code> often have the strongest impact on risk assessments.</li>
+<li>Helps identify the <strong>most important factors in the model’s decisions</strong>.</li>
+</ul>
+<hr>
+<h4 id="d-dependence-plot--feature-interaction">d) Dependence Plot – Feature Interaction</h4>
+<ul>
+<li>Explores <strong>how one feature interacts with others</strong>.</li>
+<li>Reveals thresholds where recidivism risk sharply changes.</li>
+<li>Useful for detecting non-linear effects and interactions.</li>
+</ul>
+<hr>
+<h3 id="5-key-takeaways">5️⃣ Key Takeaways</h3>
+<ul>
+<li><strong>Transparency:</strong> SHAP reveals the model’s reasoning to both technical and non-technical audiences.</li>
+<li><strong>Feature contributions:</strong> Malik’s low-risk classification is primarily driven by <strong>few prior offenses</strong> and <strong>age</strong>.</li>
+<li><strong>Consistency:</strong> SHAP’s additive property ensures all contributions sum to the predicted outcome.</li>
+<li><strong>Stakeholder insight:</strong> Community members or policymakers can see <strong>why the model made this decision</strong>, which helps evaluate fairness and potential bias.</li>
+</ul>
+<h3 id="5-practical-tips">5. Practical Tips</h3>
+<p>Global vs Local explanations: Use summary plots for global insights and force_plot for individual predictions.</p>
+<p>Handling correlated features: Shapley values assume feature independence. Consider techniques like shap.dependence_plot to detect interactions.</p>
+<p>Performance: For very large datasets, consider sampling or using approximate=True in TreeSHAP.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>SHAP bridges the gap between complex models and human interpretability, offering a mathematically principled way to explain predictions. Whether for compliance, debugging, or trust-building, SHAP equips data scientists with actionable insight into how features drive model behavior.</p>
+<p>By mastering SHAP, you not only make your models transparent but also gain the power to communicate their decisions clearly.</p>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/explainable-ai/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Explainable-Ai</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/shap/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Shap</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/machine-learning/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Machine-Learning</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/model-interpretability/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Model-Interpretability</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://localhost:1313/" >
+    &copy;  Alejandro Paredes La Torre 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>

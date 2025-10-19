@@ -4,6 +4,22 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
+    
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+
+<script>
+  MathJax = {
+    tex: {
+      displayMath: [['\\[', '\\]'], ['$$', '$$']],  
+      inlineMath: [['\\(', '\\)']]                  
+    },
+    loader:{
+      load: ['ui/safe']
+    },
+  };
+</script>
+    
+    
     <title>Alejandro Paredes La Torre</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
     <meta name="description" content="">
@@ -112,10 +128,10 @@
       </a>
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
-      <p><img src="pizza_shapley_story.gif" alt="Pizza Shapley Animation"></p>
-<blockquote>
+      <blockquote>
 <p><strong>TL;DR</strong> — SHAP (SHapley Additive exPlanations) is a principled framework for interpreting ML predictions. By borrowing ideas from cooperative game theory, SHAP quantifies the contribution of each feature for a given prediction. In this guide, we’ll unpack the math, intuition, and practical implementation.</p>
 </blockquote>
+<p><img src="pizza_shapley_story.gif" alt="Pizza Shapley Animation"></p>
 <hr>
 <h2 id="1-motivation--why-interpretability-matters">1. Motivation — Why Interpretability Matters</h2>
 <p>Modern machine learning models are increasingly complex, think ensembles, gradient boosting, or deep neural networks. Without interpretability, these models are <strong>black boxes</strong>. Understanding <em>why</em> a model makes a prediction is essential for:</p>
@@ -141,10 +157,10 @@
       </a>
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
-      <p><img src="pizza_shapley_story.gif" alt="Pizza Shapley Animation"></p>
-<blockquote>
+      <blockquote>
 <p><strong>TL;DR</strong> — SHAP (SHapley Additive exPlanations) is a principled framework for interpreting ML predictions. By borrowing ideas from cooperative game theory, SHAP quantifies the contribution of each feature for a given prediction. In this guide, we’ll unpack the math, intuition, and practical implementation.</p>
 </blockquote>
+<p><img src="pizza_shapley_story.gif" alt="Pizza Shapley Animation"></p>
 <hr>
 <h2 id="1-motivation--why-interpretability-matters">1. Motivation — Why Interpretability Matters</h2>
 <p>Modern machine learning models are increasingly complex, think ensembles, gradient boosting, or deep neural networks. Without interpretability, these models are <strong>black boxes</strong>. Understanding <em>why</em> a model makes a prediction is essential for:</p>

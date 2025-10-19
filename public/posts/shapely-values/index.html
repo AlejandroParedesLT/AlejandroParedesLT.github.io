@@ -70,7 +70,7 @@
   <meta itemprop="description" content="A complete guide to SHAP values — how they work, why they matter, and how to implement them in practice for model interpretability.">
   <meta itemprop="datePublished" content="2025-10-19T00:00:00+00:00">
   <meta itemprop="dateModified" content="2025-10-19T00:00:00+00:00">
-  <meta itemprop="wordCount" content="1569">
+  <meta itemprop="wordCount" content="2223">
   <meta itemprop="keywords" content="Explainable-Ai,Shap,Machine-Learning,Model-Interpretability">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Understanding SHAP Values: From Theory to Implementation">
@@ -130,10 +130,10 @@
       
       
     </header>
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p><img src="pizza_shapley_story.gif" alt="Pizza Shapley Animation"></p>
-<blockquote>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><blockquote>
 <p><strong>TL;DR</strong> — SHAP (SHapley Additive exPlanations) is a principled framework for interpreting ML predictions. By borrowing ideas from cooperative game theory, SHAP quantifies the contribution of each feature for a given prediction. In this guide, we’ll unpack the math, intuition, and practical implementation.</p>
 </blockquote>
+<p><img src="pizza_shapley_story.gif" alt="Pizza Shapley Animation"></p>
 <hr>
 <h2 id="1-motivation--why-interpretability-matters">1. Motivation — Why Interpretability Matters</h2>
 <p>Modern machine learning models are increasingly complex, think ensembles, gradient boosting, or deep neural networks. Without interpretability, these models are <strong>black boxes</strong>. Understanding <em>why</em> a model makes a prediction is essential for:</p>
@@ -294,9 +294,14 @@ f(x) = \phi_0 + \sum_{i=1}^{M} \phi_i
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>shap<span style="color:#f92672">.</span>plots<span style="color:#f92672">.</span>force(shap_values_focus[<span style="color:#ae81ff">0</span>])
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>shap<span style="color:#f92672">.</span>plots<span style="color:#f92672">.</span>summary(shap_values_test, X_test)
+</span></span><span style="display:flex;"><span>shap<span style="color:#f92672">.</span>plots<span style="color:#f92672">.</span>scatter(shap_values_test[:, <span style="color:#e6db74">&#34;age&#34;</span>,<span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>shap<span style="color:#f92672">.</span>plots<span style="color:#f92672">.</span>scatter(shap_values_test[:, <span style="color:#e6db74">&#34;priors_count&#34;</span>,<span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>shap<span style="color:#f92672">.</span>plots<span style="color:#f92672">.</span>scatter(shap_values_test[:, <span style="color:#e6db74">&#34;c_charge_degree&#34;</span>,<span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>shap<span style="color:#f92672">.</span>plots<span style="color:#f92672">.</span>scatter(shap_values_test[:, <span style="color:#e6db74">&#34;race&#34;</span>,<span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>shap<span style="color:#f92672">.</span>plots<span style="color:#f92672">.</span>scatter(shap_values_test[:, <span style="color:#e6db74">&#34;sex&#34;</span>,<span style="color:#ae81ff">1</span>])
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>shap<span style="color:#f92672">.</span>plots<span style="color:#f92672">.</span>dependence(<span style="color:#e6db74">&#34;priors_count&#34;</span>, shap_values_test, X_test)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>shap<span style="color:#f92672">.</span>plots<span style="color:#f92672">.</span>summary(shap_values_test, X_test)
 </span></span></code></pre></div></details>
 <h3 id="1-waterfall-plot"><strong>1. Waterfall Plot</strong></h3>
 <p>The <strong>waterfall plot</strong> shows how the model starts at a baseline value (the average prediction) and then <strong>accumulates contributions from each feature</strong> to reach the final prediction for a single individual.</p>
@@ -354,16 +359,7 @@ f(x) = \phi_0 + \sum_{i=1}^{M} \phi_i
 </script></body></html>
 
 <hr>
-<h3 id="3-summary-plot"><strong>3. Summary Plot</strong></h3>
-<p>The <strong>summary plot</strong> provides a <strong>global view across the dataset</strong>. Instead of focusing on one individual, it shows the <strong>overall importance and effect of each feature</strong> for the model.</p>
-<ul>
-<li>Features are ranked by importance — the ones that most strongly influence predictions appear at the top.</li>
-<li>Each dot represents a single individual’s SHAP value for that feature. Color often encodes the <strong>actual feature value</strong> (e.g., dark red = high, dark blue = low).</li>
-<li>Spread of the dots shows the variability: some features may consistently push predictions in the same direction, while others vary.</li>
-</ul>
-<p><strong>Purpose:</strong> This helps answer: <em>“Which features matter most, and how do they generally affect the model?”</em></p>
-<hr>
-<h3 id="4-dependence-plot"><strong>4. Dependence Plot</strong></h3>
+<h3 id="3-shap-dependence-plot"><strong>3. SHAP dependence plot</strong></h3>
 <p>The <strong>dependence plot</strong> looks at <strong>one specific feature</strong> and shows how its value affects predictions across all individuals.</p>
 <ul>
 <li>The x-axis shows the feature’s actual value (e.g., number of prior offenses).</li>
@@ -371,6 +367,115 @@ f(x) = \phi_0 + \sum_{i=1}^{M} \phi_i
 <li>Color often represents another feature that interacts with the main one, helping reveal <strong>feature interactions</strong>.</li>
 </ul>
 <p><strong>Purpose:</strong> This lets you understand <strong>how changes in a feature affect predictions</strong>, and whether its effect depends on other features.</p>
+<p><img src="c_charge_degree.png" alt="Pizza Shapley Animation"></p>
+<p>What we observe:</p>
+<p>Clear binary split: Misdemeanors (0) vs Felonies (1)</p>
+<ul>
+<li>Misdemeanor charges consistently produce negative SHAP values (−0.10 to +0.05), pushing predictions toward lower recidivism risk</li>
+<li>Felony charges generate predominantly positive SHAP values (−0.05 to +0.15), pushing predictions toward higher recidivism risk
+Interpretation:
+The model treats the severity of the current charge as a strong indicator of future behavior. Being charged with a felony rather than a misdemeanor substantially increases the predicted likelihood of recidivism. This makes intuitive sense, as felonies represent more serious criminal behavior.</li>
+</ul>
+<blockquote>
+<p>For Malik Johnson: His felony charge contributes positively to his recidivism risk score, working against a low-risk classification.</p>
+</blockquote>
+<p><strong>Race</strong></p>
+<p><img src="drace.png" alt="Pizza Shapley Animation"></p>
+<p>What we observe:</p>
+<p>Six racial categories (coded 0–5) show distinctly different SHAP value distributions</p>
+<ul>
+<li>Category 0 trends toward positive SHAP values (increasing risk)</li>
+<li>Category 2 shows the widest variability, with both high positive and high negative values</li>
+<li>Categories 3, 4, and 5 show more modest, mixed effects</li>
+</ul>
+<p>Interpretation:
+Race is a significant factor in the model&rsquo;s predictions, which raises serious fairness and bias concerns. Different racial groups receive systematically different risk assessments even when controlling for other factors. This reflects potential bias in either the training data (historical patterns of recidivism) or the criminal justice system itself.
+Ethical Issue: Race should ideally have minimal to no impact on recidivism predictions, as it&rsquo;s a protected demographic characteristic. Its prominence suggests the model may perpetuate historical biases.</p>
+<blockquote>
+<p>For Malik Johnson: His racial category may be contributing unfairly to his risk assessment.</p>
+</blockquote>
+<p><strong>Age</strong></p>
+<p><img src="pdage.png" alt="Pizza Shapley Animation"></p>
+<p>What we observe:</p>
+<p>Strong negative correlation: as age increases from 20 to 80, SHAP values decrease from +0.5 to −0.3</p>
+<ul>
+<li>Younger defendants (20–30) receive substantial positive contributions to their risk scores</li>
+<li>Older defendants (60+) receive negative contributions, lowering their predicted risk</li>
+</ul>
+<p>The histogram shows most defendants are concentrated in the 20–40 age range</p>
+<p>Interpretation:
+Age is one of the model&rsquo;s strongest predictors. Youth is treated as a significant risk factor for recidivism, while older age is protective. This aligns with criminological research showing that criminal behavior tends to decline with age (the &ldquo;age-crime curve&rdquo;). However, the steep gradient means young offenders are systematically rated as higher risk.</p>
+<blockquote>
+<p>For Malik Johnson: At 27 years old, he falls in the high-risk age range, which pushes his prediction toward recidivism despite his limited criminal history.</p>
+</blockquote>
+<p><strong>Priors count</strong></p>
+<p><img src="priors_count.png" alt="Pizza Shapley Animation"></p>
+<p>What we observe:</p>
+<p>Clear positive correlation: more prior convictions lead to higher SHAP values. The relationship is nearly linear and monotonic.</p>
+<ul>
+<li>0–5 priors result in negative to neutral SHAP values (lower risk)</li>
+<li>15+ priors generate strongly positive SHAP values (+0.3 to +0.5), dramatically increasing predicted risk</li>
+</ul>
+<p>Interpretation:</p>
+<p>Criminal history is the most important and legitimate predictor in the model. Each additional prior conviction incrementally increases the predicted recidivism risk. This feature shows consistent, interpretable behavior without problematic interactions. Unlike demographic features, prior convictions represent actual behavioral history and are a legally defensible basis for risk assessment.</p>
+<blockquote>
+<p>For Malik Johnson: His single prior conviction is one of his strongest protective factors, producing a negative SHAP contribution that works in favor of a low-risk classification.</p>
+</blockquote>
+<p><strong>Sex</strong></p>
+<p><img src="sex.png" alt="Pizza Shapley Animation"></p>
+<p>What we observe:</p>
+<p>Binary split: Females (0) vs Males (1)</p>
+<ul>
+<li>Female defendants receive predominantly negative SHAP values (−0.15 to 0), decreasing predicted risk</li>
+<li>Male defendants receive positive SHAP values (−0.05 to +0.10), increasing predicted risk</li>
+</ul>
+<p>Clear separation between groups with some overlap</p>
+<p>Interpretation:</p>
+<p>Sex is a meaningful predictor in the model, with males systematically assigned higher recidivism risk than females. While this may reflect actual statistical patterns in recidivism data, it raises fairness concerns about using demographic characteristics in high-stakes decisions. Like race, sex is a protected characteristic that arguably shouldn&rsquo;t directly influence criminal justice outcomes.</p>
+<p>Ethical Issue: Even if statistically predictive, using sex as a feature may violate principles of individual assessment and equal treatment under the law.</p>
+<blockquote>
+<p>For Malik Johnson: Being male contributes positively to his risk score, working against a low-risk classification.</p>
+</blockquote>
+<hr>
+<h3 id="4-summary-plot"><strong>4. Summary Plot</strong></h3>
+<p>The <strong>summary plot</strong> provides a <strong>global view across the dataset</strong>. Instead of focusing on one individual, it shows the <strong>overall importance and effect of each feature</strong> for the model.</p>
+<ul>
+<li>Features are ranked by importance — the ones that most strongly influence predictions appear at the top.</li>
+<li>Each dot represents a single individual’s SHAP value for that feature. Color often encodes the <strong>actual feature value</strong> (e.g., dark red = high, dark blue = low).</li>
+<li>Spread of the dots shows the variability: some features may consistently push predictions in the same direction, while others vary.</li>
+</ul>
+<p><strong>Purpose:</strong> This helps answer: <em>“Which features matter most, and how do they generally affect the model?”</em></p>
+<p><img src="swarm-plot.png" alt="Pizza Shapley Animation"></p>
+<p>This comprehensive visualization shows the relative importance and impact of all features:
+Feature Ranking (by importance):</p>
+<ul>
+<li>priors_count (top) - Most important feature</li>
+</ul>
+<p>Wide horizontal spread shows high impact on predictions
+Blue (low values) push predictions left (negative), Pink/Red (high values) push right (positive)</p>
+<ul>
+<li>age (second)</li>
+</ul>
+<p>Pink (younger) increases risk, Blue (older) decreases risk
+Substantial spread indicating strong influence</p>
+<ul>
+<li>race (third)</li>
+</ul>
+<p>Mixed colors show complex interactions
+Concerning that this demographic factor ranks so high</p>
+<ul>
+<li>sex (fourth)</li>
+</ul>
+<p>Moderate impact with clear directional pattern</p>
+<ul>
+<li>c_charge_degree (fifth)</li>
+</ul>
+<p>Moderate importance, felonies increase risk</p>
+<ul>
+<li>juv_other_count, juv_misd_count, juv_fel_count (bottom)</li>
+</ul>
+<p>Relatively minor impact on predictions
+Juvenile history matters less than adult criminal history</p>
 <hr>
 <h3 id="putting-it-all-together"><strong>Putting It All Together</strong></h3>
 <ul>
@@ -379,28 +484,7 @@ f(x) = \phi_0 + \sum_{i=1}^{M} \phi_i
 <li><strong>Dependence plot</strong> → how a single feature behaves across all individuals and interacts with others.</li>
 </ul>
 <hr>
-<h4 id="b-force-plot--interactive-explanation">b) Force Plot – Interactive Explanation</h4>
-<ul>
-<li>Visualizes contributions as <strong>forces pushing the prediction higher or lower</strong>.</li>
-<li>Red arrows push toward recidivism; blue arrows push toward no recidivism.</li>
-<li>Very intuitive for <strong>non-technical stakeholders</strong>.</li>
-</ul>
-<hr>
-<h4 id="c-summary-plot--global-feature-importance">c) Summary Plot – Global Feature Importance</h4>
-<ul>
-<li>Shows <strong>which features influence predictions across the dataset</strong>.</li>
-<li>For example, <code>priors_count</code> and <code>age</code> often have the strongest impact on risk assessments.</li>
-<li>Helps identify the <strong>most important factors in the model’s decisions</strong>.</li>
-</ul>
-<hr>
-<h4 id="d-dependence-plot--feature-interaction">d) Dependence Plot – Feature Interaction</h4>
-<ul>
-<li>Explores <strong>how one feature interacts with others</strong>.</li>
-<li>Reveals thresholds where recidivism risk sharply changes.</li>
-<li>Useful for detecting non-linear effects and interactions.</li>
-</ul>
-<hr>
-<h3 id="5-key-takeaways">5️⃣ Key Takeaways</h3>
+<h3 id="key-takeaways">Key Takeaways</h3>
 <ul>
 <li><strong>Transparency:</strong> SHAP reveals the model’s reasoning to both technical and non-technical audiences.</li>
 <li><strong>Feature contributions:</strong> Malik’s low-risk classification is primarily driven by <strong>few prior offenses</strong> and <strong>age</strong>.</li>

@@ -28,7 +28,7 @@ SHAP provides a **unified and theoretically sound** way to measure feature contr
 
 ---
 
-## 2. The Game Theory Behind SHAP
+## 2. The Game Theory Behind SHAP (MATH - Skip to section 5 if you rather inspect a more practical approach to this technique)
 
 ### 2.1 Shapley Values
 
@@ -93,7 +93,7 @@ SHAP uses **model-specific approximations**:
 | Model-agnostic | KernelSHAP | Approximate | Weighted linear regression |
 
 
-## ⚖️ Case Study: Understanding Recidivism Risk with SHAP
+## 5 Case Study: Understanding Recidivism Risk with SHAP
 
 
 TreeSHAP efficiently distributes credit along tree paths, caching intermediate results to avoid exponential computation.
@@ -406,7 +406,7 @@ Juvenile history matters less than adult criminal history
 * **Stakeholder insight:** Community members or policymakers can see **why the model made this decision**, which helps evaluate fairness and potential bias.
 
 
-### 5. Practical Tips
+### 6. Practical Tips
 
 Global vs Local explanations: Use summary plots for global insights and force_plot for individual predictions.
 
@@ -414,7 +414,7 @@ Handling correlated features: Shapley values assume feature independence. Consid
 
 Performance: For very large datasets, consider sampling or using approximate=True in TreeSHAP.
 
-### Conclusion
+### 7. Conclusion
 
 SHAP bridges the gap between complex models and human interpretability, offering a mathematically principled way to explain predictions. Whether for compliance, debugging, or trust-building, SHAP equips data scientists with actionable insight into how features drive model behavior.
 

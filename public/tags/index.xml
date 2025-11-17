@@ -6,20 +6,69 @@
     <description>Recent content in Tags on Alejandro Paredes La Torre</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 19 Oct 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 16 Nov 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AI</title>
+      <link>http://localhost:1313/tags/ai/</link>
+      <pubDate>Sun, 16 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/ai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Algorithmic-Bias</title>
+      <link>http://localhost:1313/tags/algorithmic-bias/</link>
+      <pubDate>Sun, 16 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/algorithmic-bias/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Explainable-Ai</title>
       <link>http://localhost:1313/tags/explainable-ai/</link>
-      <pubDate>Sun, 19 Oct 2025 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 16 Nov 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/tags/explainable-ai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Fairness</title>
+      <link>http://localhost:1313/tags/fairness/</link>
+      <pubDate>Sun, 16 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/fairness/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Governance</title>
+      <link>http://localhost:1313/tags/governance/</link>
+      <pubDate>Sun, 16 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/governance/</guid>
       <description></description>
     </item>
     <item>
       <title>Machine-Learning</title>
       <link>http://localhost:1313/tags/machine-learning/</link>
-      <pubDate>Sun, 19 Oct 2025 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 16 Nov 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/tags/machine-learning/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Power</title>
+      <link>http://localhost:1313/tags/power/</link>
+      <pubDate>Sun, 16 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/power/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Security</title>
+      <link>http://localhost:1313/tags/security/</link>
+      <pubDate>Sun, 16 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/security/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Systems</title>
+      <link>http://localhost:1313/tags/systems/</link>
+      <pubDate>Sun, 16 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/systems/</guid>
       <description></description>
     </item>
     <item>

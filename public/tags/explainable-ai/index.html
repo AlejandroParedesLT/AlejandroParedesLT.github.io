@@ -63,8 +63,8 @@
   <meta property="og:type" content="website">
 
   <meta itemprop="name" content="Explainable-Ai">
-  <meta itemprop="datePublished" content="2025-10-19T00:00:00+00:00">
-  <meta itemprop="dateModified" content="2025-10-19T00:00:00+00:00">
+  <meta itemprop="datePublished" content="2025-11-16T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2025-11-16T00:00:00+00:00">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Explainable-Ai">
 
@@ -111,6 +111,83 @@
   </article>
   <div class="mw8 center">
     <section class="flex-ns mt5 flex-wrap justify-around">
+      
+        <div class="w-100 mb4 relative bg-white">
+          <div class="w-100 mb4 nested-copy-line-height relative bg-white">
+  <div class="mb3 pa4 gray overflow-hidden bg-white">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/posts/unmaskingai/" class="link black dim">
+        Unmasking AI: Technical Insights and Policy Implications
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      <pre tabindex="0"><code>
+# Understanding Bias in AI: A Technical Exploration
+
+Joy Buolamwini’s *Unmasking AI* illustrates the intersection of machine learning, human-centered design, and policy. This post highlights the book’s key technical lessons and their implications for AI governance. Interactive elements allow readers to engage with concepts like dataset composition, classification errors, and intersectional performance disparities.
+
+---
+
+## Interactive Chapter Guide
+
+Click to expand technical and policy insights from each chapter.
+
+&lt;details&gt;
+&lt;summary&gt;Chapter 1–3: Foundations and Early Observations&lt;/summary&gt;
+
+**Technical Takeaways**:
+
+* Early exposure to computing, graphics, and human-centered design.
+* Experiments with interactive installations revealed bias in computer vision systems (e.g., Upbeat Walls failing for darker faces).
+
+**Policy Insight**:
+
+* Even early-stage tech environments can embed exclusionary practices.
+* Raises awareness that human-centered AI design must consider diverse populations.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Chapter 4–6: Public Demonstrations and Face Analytics&lt;/summary&gt;
+
+**Technical Takeaways**:
+
+* Aspire Mirror exhibit demonstrates face-detection failures.
+* Defines “face analytics” tasks: detection, classification, recognition.
+* Highlights “AI functionality fallacy”: overestimating what algorithms can do.
+
+**Interactive Python Example: Simulating Detection Bias**
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Simulate misclassification probabilities
+skin_tones = [&#39;Light&#39;, &#39;Medium&#39;, &#39;Dark&#39;]
+genders = [&#39;Male&#39;, &#39;Female&#39;]
+error_rates = np.array([[0.02, 0.10], [0.05, 0.20], [0.08, 0.30]])  # Dark female highest
+
+fig, ax = plt.subplots()
+im = ax.imshow(error_rates, cmap=&#39;Reds&#39;)
+
+# Show labels
+ax.set_xticks(np.arange(len(genders)))
+ax.set_yticks(np.arange(len(skin_tones)))
+ax.set_xticklabels(genders)
+ax.set_yticklabels(skin_tones)
+ax.set_title(&#34;Simulated Face Recognition Error Rates&#34;)
+for i in range(len(skin_tones)):
+    for j in range(len(genders)):
+        ax.text(j, i, f&#34;{error_rates[i, j]*100:.0f}%&#34;, ha=&#34;center&#34;, va=&#34;center&#34;, color=&#34;black&#34;)
+plt.show()
+</code></pre><p>This plot mirrors Buolamwini’s findings: intersectional analysis is critical to uncover hidden bias.</p>
+    </div>
+    <a href="/posts/unmaskingai/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+  </div>
+</div>
+
+        </div>
       
         <div class="w-100 mb4 relative bg-white">
           <div class="w-100 mb4 nested-copy-line-height relative bg-white">

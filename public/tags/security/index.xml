@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Security on Alejandro Paredes La Torre</title>
+    <link>http://localhost:1313/tags/security/</link>
+    <description>Recent content in Security on Alejandro Paredes La Torre</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 16 Nov 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/security/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Applying Concepts from A Hacker&#39;s Mind by Bruce Schneier</title>
+      <link>http://localhost:1313/posts/ahackersmind/</link>
+      <pubDate>Sun, 16 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/ahackersmind/</guid>
+      <description>&lt;h1 id=&#34;a-hackers-mind-real-world-applied-insights&#34;&gt;A Hacker&amp;rsquo;s Mind: Real World Applied Insights&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;A Hacker&amp;rsquo;s Mind&lt;/strong&gt; analyses how hacking transcends code, networks, and cryptographic systems. Schneier frames hacking as exploiting rules, incentives, and institutional structures. This post examines direct applications from the book through modern examples and thought experiments.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;core-premise-illustrated&#34;&gt;Core Premise Illustrated&lt;/h2&gt;&#xA;&lt;p&gt;Rules are not objective barriers. They are design artifacts. Anyone with incentive, creativity, and domain insight can search for unintended outcomes inside procedural, legal, economic, or algorithmic frameworks.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

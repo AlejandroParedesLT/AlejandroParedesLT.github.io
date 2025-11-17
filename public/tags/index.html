@@ -63,8 +63,8 @@
   <meta property="og:type" content="website">
 
   <meta itemprop="name" content="Tags">
-  <meta itemprop="datePublished" content="2025-10-19T00:00:00+00:00">
-  <meta itemprop="dateModified" content="2025-10-19T00:00:00+00:00">
+  <meta itemprop="datePublished" content="2025-11-16T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2025-11-16T00:00:00+00:00">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Tags">
 
@@ -114,10 +114,249 @@
     <section class="ph4">
       
         <h2 class="f1">
+          <a href="/tags/ai/" class="link blue hover-black">
+            Tag: AI
+          </a>
+        </h2>
+        
+          <div class="w-100 mb4 nested-copy-line-height relative bg-white">
+  <div class="mb3 pa4 gray overflow-hidden bg-white">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/posts/unmaskingai/" class="link black dim">
+        Unmasking AI: Technical Insights and Policy Implications
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      <pre tabindex="0"><code>
+# Understanding Bias in AI: A Technical Exploration
+
+Joy Buolamwini’s *Unmasking AI* illustrates the intersection of machine learning, human-centered design, and policy. This post highlights the book’s key technical lessons and their implications for AI governance. Interactive elements allow readers to engage with concepts like dataset composition, classification errors, and intersectional performance disparities.
+
+---
+
+## Interactive Chapter Guide
+
+Click to expand technical and policy insights from each chapter.
+
+&lt;details&gt;
+&lt;summary&gt;Chapter 1–3: Foundations and Early Observations&lt;/summary&gt;
+
+**Technical Takeaways**:
+
+* Early exposure to computing, graphics, and human-centered design.
+* Experiments with interactive installations revealed bias in computer vision systems (e.g., Upbeat Walls failing for darker faces).
+
+**Policy Insight**:
+
+* Even early-stage tech environments can embed exclusionary practices.
+* Raises awareness that human-centered AI design must consider diverse populations.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Chapter 4–6: Public Demonstrations and Face Analytics&lt;/summary&gt;
+
+**Technical Takeaways**:
+
+* Aspire Mirror exhibit demonstrates face-detection failures.
+* Defines “face analytics” tasks: detection, classification, recognition.
+* Highlights “AI functionality fallacy”: overestimating what algorithms can do.
+
+**Interactive Python Example: Simulating Detection Bias**
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Simulate misclassification probabilities
+skin_tones = [&#39;Light&#39;, &#39;Medium&#39;, &#39;Dark&#39;]
+genders = [&#39;Male&#39;, &#39;Female&#39;]
+error_rates = np.array([[0.02, 0.10], [0.05, 0.20], [0.08, 0.30]])  # Dark female highest
+
+fig, ax = plt.subplots()
+im = ax.imshow(error_rates, cmap=&#39;Reds&#39;)
+
+# Show labels
+ax.set_xticks(np.arange(len(genders)))
+ax.set_yticks(np.arange(len(skin_tones)))
+ax.set_xticklabels(genders)
+ax.set_yticklabels(skin_tones)
+ax.set_title(&#34;Simulated Face Recognition Error Rates&#34;)
+for i in range(len(skin_tones)):
+    for j in range(len(genders)):
+        ax.text(j, i, f&#34;{error_rates[i, j]*100:.0f}%&#34;, ha=&#34;center&#34;, va=&#34;center&#34;, color=&#34;black&#34;)
+plt.show()
+</code></pre><p>This plot mirrors Buolamwini’s findings: intersectional analysis is critical to uncover hidden bias.</p>
+    </div>
+    <a href="/posts/unmaskingai/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+  </div>
+</div>
+
+        
+      
+        <h2 class="f1">
+          <a href="/tags/algorithmic-bias/" class="link blue hover-black">
+            Tag: Algorithmic-Bias
+          </a>
+        </h2>
+        
+          <div class="w-100 mb4 nested-copy-line-height relative bg-white">
+  <div class="mb3 pa4 gray overflow-hidden bg-white">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/posts/unmaskingai/" class="link black dim">
+        Unmasking AI: Technical Insights and Policy Implications
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      <pre tabindex="0"><code>
+# Understanding Bias in AI: A Technical Exploration
+
+Joy Buolamwini’s *Unmasking AI* illustrates the intersection of machine learning, human-centered design, and policy. This post highlights the book’s key technical lessons and their implications for AI governance. Interactive elements allow readers to engage with concepts like dataset composition, classification errors, and intersectional performance disparities.
+
+---
+
+## Interactive Chapter Guide
+
+Click to expand technical and policy insights from each chapter.
+
+&lt;details&gt;
+&lt;summary&gt;Chapter 1–3: Foundations and Early Observations&lt;/summary&gt;
+
+**Technical Takeaways**:
+
+* Early exposure to computing, graphics, and human-centered design.
+* Experiments with interactive installations revealed bias in computer vision systems (e.g., Upbeat Walls failing for darker faces).
+
+**Policy Insight**:
+
+* Even early-stage tech environments can embed exclusionary practices.
+* Raises awareness that human-centered AI design must consider diverse populations.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Chapter 4–6: Public Demonstrations and Face Analytics&lt;/summary&gt;
+
+**Technical Takeaways**:
+
+* Aspire Mirror exhibit demonstrates face-detection failures.
+* Defines “face analytics” tasks: detection, classification, recognition.
+* Highlights “AI functionality fallacy”: overestimating what algorithms can do.
+
+**Interactive Python Example: Simulating Detection Bias**
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Simulate misclassification probabilities
+skin_tones = [&#39;Light&#39;, &#39;Medium&#39;, &#39;Dark&#39;]
+genders = [&#39;Male&#39;, &#39;Female&#39;]
+error_rates = np.array([[0.02, 0.10], [0.05, 0.20], [0.08, 0.30]])  # Dark female highest
+
+fig, ax = plt.subplots()
+im = ax.imshow(error_rates, cmap=&#39;Reds&#39;)
+
+# Show labels
+ax.set_xticks(np.arange(len(genders)))
+ax.set_yticks(np.arange(len(skin_tones)))
+ax.set_xticklabels(genders)
+ax.set_yticklabels(skin_tones)
+ax.set_title(&#34;Simulated Face Recognition Error Rates&#34;)
+for i in range(len(skin_tones)):
+    for j in range(len(genders)):
+        ax.text(j, i, f&#34;{error_rates[i, j]*100:.0f}%&#34;, ha=&#34;center&#34;, va=&#34;center&#34;, color=&#34;black&#34;)
+plt.show()
+</code></pre><p>This plot mirrors Buolamwini’s findings: intersectional analysis is critical to uncover hidden bias.</p>
+    </div>
+    <a href="/posts/unmaskingai/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+  </div>
+</div>
+
+        
+      
+        <h2 class="f1">
           <a href="/tags/explainable-ai/" class="link blue hover-black">
             Tag: Explainable-Ai
           </a>
         </h2>
+        
+          <div class="w-100 mb4 nested-copy-line-height relative bg-white">
+  <div class="mb3 pa4 gray overflow-hidden bg-white">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/posts/unmaskingai/" class="link black dim">
+        Unmasking AI: Technical Insights and Policy Implications
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      <pre tabindex="0"><code>
+# Understanding Bias in AI: A Technical Exploration
+
+Joy Buolamwini’s *Unmasking AI* illustrates the intersection of machine learning, human-centered design, and policy. This post highlights the book’s key technical lessons and their implications for AI governance. Interactive elements allow readers to engage with concepts like dataset composition, classification errors, and intersectional performance disparities.
+
+---
+
+## Interactive Chapter Guide
+
+Click to expand technical and policy insights from each chapter.
+
+&lt;details&gt;
+&lt;summary&gt;Chapter 1–3: Foundations and Early Observations&lt;/summary&gt;
+
+**Technical Takeaways**:
+
+* Early exposure to computing, graphics, and human-centered design.
+* Experiments with interactive installations revealed bias in computer vision systems (e.g., Upbeat Walls failing for darker faces).
+
+**Policy Insight**:
+
+* Even early-stage tech environments can embed exclusionary practices.
+* Raises awareness that human-centered AI design must consider diverse populations.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Chapter 4–6: Public Demonstrations and Face Analytics&lt;/summary&gt;
+
+**Technical Takeaways**:
+
+* Aspire Mirror exhibit demonstrates face-detection failures.
+* Defines “face analytics” tasks: detection, classification, recognition.
+* Highlights “AI functionality fallacy”: overestimating what algorithms can do.
+
+**Interactive Python Example: Simulating Detection Bias**
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Simulate misclassification probabilities
+skin_tones = [&#39;Light&#39;, &#39;Medium&#39;, &#39;Dark&#39;]
+genders = [&#39;Male&#39;, &#39;Female&#39;]
+error_rates = np.array([[0.02, 0.10], [0.05, 0.20], [0.08, 0.30]])  # Dark female highest
+
+fig, ax = plt.subplots()
+im = ax.imshow(error_rates, cmap=&#39;Reds&#39;)
+
+# Show labels
+ax.set_xticks(np.arange(len(genders)))
+ax.set_yticks(np.arange(len(skin_tones)))
+ax.set_xticklabels(genders)
+ax.set_yticklabels(skin_tones)
+ax.set_title(&#34;Simulated Face Recognition Error Rates&#34;)
+for i in range(len(skin_tones)):
+    for j in range(len(genders)):
+        ax.text(j, i, f&#34;{error_rates[i, j]*100:.0f}%&#34;, ha=&#34;center&#34;, va=&#34;center&#34;, color=&#34;black&#34;)
+plt.show()
+</code></pre><p>This plot mirrors Buolamwini’s findings: intersectional analysis is critical to uncover hidden bias.</p>
+    </div>
+    <a href="/posts/unmaskingai/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+  </div>
+</div>
+
         
           <div class="w-100 mb4 nested-copy-line-height relative bg-white">
   <div class="mb3 pa4 gray overflow-hidden bg-white">
@@ -143,10 +382,194 @@
         
       
         <h2 class="f1">
+          <a href="/tags/fairness/" class="link blue hover-black">
+            Tag: Fairness
+          </a>
+        </h2>
+        
+          <div class="w-100 mb4 nested-copy-line-height relative bg-white">
+  <div class="mb3 pa4 gray overflow-hidden bg-white">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/posts/unmaskingai/" class="link black dim">
+        Unmasking AI: Technical Insights and Policy Implications
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      <pre tabindex="0"><code>
+# Understanding Bias in AI: A Technical Exploration
+
+Joy Buolamwini’s *Unmasking AI* illustrates the intersection of machine learning, human-centered design, and policy. This post highlights the book’s key technical lessons and their implications for AI governance. Interactive elements allow readers to engage with concepts like dataset composition, classification errors, and intersectional performance disparities.
+
+---
+
+## Interactive Chapter Guide
+
+Click to expand technical and policy insights from each chapter.
+
+&lt;details&gt;
+&lt;summary&gt;Chapter 1–3: Foundations and Early Observations&lt;/summary&gt;
+
+**Technical Takeaways**:
+
+* Early exposure to computing, graphics, and human-centered design.
+* Experiments with interactive installations revealed bias in computer vision systems (e.g., Upbeat Walls failing for darker faces).
+
+**Policy Insight**:
+
+* Even early-stage tech environments can embed exclusionary practices.
+* Raises awareness that human-centered AI design must consider diverse populations.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Chapter 4–6: Public Demonstrations and Face Analytics&lt;/summary&gt;
+
+**Technical Takeaways**:
+
+* Aspire Mirror exhibit demonstrates face-detection failures.
+* Defines “face analytics” tasks: detection, classification, recognition.
+* Highlights “AI functionality fallacy”: overestimating what algorithms can do.
+
+**Interactive Python Example: Simulating Detection Bias**
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Simulate misclassification probabilities
+skin_tones = [&#39;Light&#39;, &#39;Medium&#39;, &#39;Dark&#39;]
+genders = [&#39;Male&#39;, &#39;Female&#39;]
+error_rates = np.array([[0.02, 0.10], [0.05, 0.20], [0.08, 0.30]])  # Dark female highest
+
+fig, ax = plt.subplots()
+im = ax.imshow(error_rates, cmap=&#39;Reds&#39;)
+
+# Show labels
+ax.set_xticks(np.arange(len(genders)))
+ax.set_yticks(np.arange(len(skin_tones)))
+ax.set_xticklabels(genders)
+ax.set_yticklabels(skin_tones)
+ax.set_title(&#34;Simulated Face Recognition Error Rates&#34;)
+for i in range(len(skin_tones)):
+    for j in range(len(genders)):
+        ax.text(j, i, f&#34;{error_rates[i, j]*100:.0f}%&#34;, ha=&#34;center&#34;, va=&#34;center&#34;, color=&#34;black&#34;)
+plt.show()
+</code></pre><p>This plot mirrors Buolamwini’s findings: intersectional analysis is critical to uncover hidden bias.</p>
+    </div>
+    <a href="/posts/unmaskingai/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+  </div>
+</div>
+
+        
+      
+        <h2 class="f1">
+          <a href="/tags/governance/" class="link blue hover-black">
+            Tag: Governance
+          </a>
+        </h2>
+        
+          <div class="w-100 mb4 nested-copy-line-height relative bg-white">
+  <div class="mb3 pa4 gray overflow-hidden bg-white">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/posts/ahackersmind/" class="link black dim">
+        Applying Concepts from A Hacker&#39;s Mind by Bruce Schneier
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      <h1 id="a-hackers-mind-real-world-applied-insights">A Hacker&rsquo;s Mind: Real World Applied Insights</h1>
+<p><strong>A Hacker&rsquo;s Mind</strong> analyses how hacking transcends code, networks, and cryptographic systems. Schneier frames hacking as exploiting rules, incentives, and institutional structures. This post examines direct applications from the book through modern examples and thought experiments.</p>
+<hr>
+<h2 id="core-premise-illustrated">Core Premise Illustrated</h2>
+<p>Rules are not objective barriers. They are design artifacts. Anyone with incentive, creativity, and domain insight can search for unintended outcomes inside procedural, legal, economic, or algorithmic frameworks.</p>
+    </div>
+    <a href="/posts/ahackersmind/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+  </div>
+</div>
+
+        
+      
+        <h2 class="f1">
           <a href="/tags/machine-learning/" class="link blue hover-black">
             Tag: Machine-Learning
           </a>
         </h2>
+        
+          <div class="w-100 mb4 nested-copy-line-height relative bg-white">
+  <div class="mb3 pa4 gray overflow-hidden bg-white">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/posts/unmaskingai/" class="link black dim">
+        Unmasking AI: Technical Insights and Policy Implications
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      <pre tabindex="0"><code>
+# Understanding Bias in AI: A Technical Exploration
+
+Joy Buolamwini’s *Unmasking AI* illustrates the intersection of machine learning, human-centered design, and policy. This post highlights the book’s key technical lessons and their implications for AI governance. Interactive elements allow readers to engage with concepts like dataset composition, classification errors, and intersectional performance disparities.
+
+---
+
+## Interactive Chapter Guide
+
+Click to expand technical and policy insights from each chapter.
+
+&lt;details&gt;
+&lt;summary&gt;Chapter 1–3: Foundations and Early Observations&lt;/summary&gt;
+
+**Technical Takeaways**:
+
+* Early exposure to computing, graphics, and human-centered design.
+* Experiments with interactive installations revealed bias in computer vision systems (e.g., Upbeat Walls failing for darker faces).
+
+**Policy Insight**:
+
+* Even early-stage tech environments can embed exclusionary practices.
+* Raises awareness that human-centered AI design must consider diverse populations.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Chapter 4–6: Public Demonstrations and Face Analytics&lt;/summary&gt;
+
+**Technical Takeaways**:
+
+* Aspire Mirror exhibit demonstrates face-detection failures.
+* Defines “face analytics” tasks: detection, classification, recognition.
+* Highlights “AI functionality fallacy”: overestimating what algorithms can do.
+
+**Interactive Python Example: Simulating Detection Bias**
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Simulate misclassification probabilities
+skin_tones = [&#39;Light&#39;, &#39;Medium&#39;, &#39;Dark&#39;]
+genders = [&#39;Male&#39;, &#39;Female&#39;]
+error_rates = np.array([[0.02, 0.10], [0.05, 0.20], [0.08, 0.30]])  # Dark female highest
+
+fig, ax = plt.subplots()
+im = ax.imshow(error_rates, cmap=&#39;Reds&#39;)
+
+# Show labels
+ax.set_xticks(np.arange(len(genders)))
+ax.set_yticks(np.arange(len(skin_tones)))
+ax.set_xticklabels(genders)
+ax.set_yticklabels(skin_tones)
+ax.set_title(&#34;Simulated Face Recognition Error Rates&#34;)
+for i in range(len(skin_tones)):
+    for j in range(len(genders)):
+        ax.text(j, i, f&#34;{error_rates[i, j]*100:.0f}%&#34;, ha=&#34;center&#34;, va=&#34;center&#34;, color=&#34;black&#34;)
+plt.show()
+</code></pre><p>This plot mirrors Buolamwini’s findings: intersectional analysis is critical to uncover hidden bias.</p>
+    </div>
+    <a href="/posts/unmaskingai/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+  </div>
+</div>
+
         
           <div class="w-100 mb4 nested-copy-line-height relative bg-white">
   <div class="mb3 pa4 gray overflow-hidden bg-white">
@@ -166,6 +589,87 @@
 <p>Modern machine learning models are increasingly complex, think ensembles, gradient boosting, or deep neural networks. Without interpretability, these models are <strong>black boxes</strong>. Understanding <em>why</em> a model makes a prediction is essential for:</p>
     </div>
     <a href="/posts/shapely-values/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+  </div>
+</div>
+
+        
+      
+        <h2 class="f1">
+          <a href="/tags/power/" class="link blue hover-black">
+            Tag: Power
+          </a>
+        </h2>
+        
+          <div class="w-100 mb4 nested-copy-line-height relative bg-white">
+  <div class="mb3 pa4 gray overflow-hidden bg-white">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/posts/ahackersmind/" class="link black dim">
+        Applying Concepts from A Hacker&#39;s Mind by Bruce Schneier
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      <h1 id="a-hackers-mind-real-world-applied-insights">A Hacker&rsquo;s Mind: Real World Applied Insights</h1>
+<p><strong>A Hacker&rsquo;s Mind</strong> analyses how hacking transcends code, networks, and cryptographic systems. Schneier frames hacking as exploiting rules, incentives, and institutional structures. This post examines direct applications from the book through modern examples and thought experiments.</p>
+<hr>
+<h2 id="core-premise-illustrated">Core Premise Illustrated</h2>
+<p>Rules are not objective barriers. They are design artifacts. Anyone with incentive, creativity, and domain insight can search for unintended outcomes inside procedural, legal, economic, or algorithmic frameworks.</p>
+    </div>
+    <a href="/posts/ahackersmind/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+  </div>
+</div>
+
+        
+      
+        <h2 class="f1">
+          <a href="/tags/security/" class="link blue hover-black">
+            Tag: Security
+          </a>
+        </h2>
+        
+          <div class="w-100 mb4 nested-copy-line-height relative bg-white">
+  <div class="mb3 pa4 gray overflow-hidden bg-white">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/posts/ahackersmind/" class="link black dim">
+        Applying Concepts from A Hacker&#39;s Mind by Bruce Schneier
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      <h1 id="a-hackers-mind-real-world-applied-insights">A Hacker&rsquo;s Mind: Real World Applied Insights</h1>
+<p><strong>A Hacker&rsquo;s Mind</strong> analyses how hacking transcends code, networks, and cryptographic systems. Schneier frames hacking as exploiting rules, incentives, and institutional structures. This post examines direct applications from the book through modern examples and thought experiments.</p>
+<hr>
+<h2 id="core-premise-illustrated">Core Premise Illustrated</h2>
+<p>Rules are not objective barriers. They are design artifacts. Anyone with incentive, creativity, and domain insight can search for unintended outcomes inside procedural, legal, economic, or algorithmic frameworks.</p>
+    </div>
+    <a href="/posts/ahackersmind/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+  </div>
+</div>
+
+        
+      
+        <h2 class="f1">
+          <a href="/tags/systems/" class="link blue hover-black">
+            Tag: Systems
+          </a>
+        </h2>
+        
+          <div class="w-100 mb4 nested-copy-line-height relative bg-white">
+  <div class="mb3 pa4 gray overflow-hidden bg-white">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/posts/ahackersmind/" class="link black dim">
+        Applying Concepts from A Hacker&#39;s Mind by Bruce Schneier
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      <h1 id="a-hackers-mind-real-world-applied-insights">A Hacker&rsquo;s Mind: Real World Applied Insights</h1>
+<p><strong>A Hacker&rsquo;s Mind</strong> analyses how hacking transcends code, networks, and cryptographic systems. Schneier frames hacking as exploiting rules, incentives, and institutional structures. This post examines direct applications from the book through modern examples and thought experiments.</p>
+<hr>
+<h2 id="core-premise-illustrated">Core Premise Illustrated</h2>
+<p>Rules are not objective barriers. They are design artifacts. Anyone with incentive, creativity, and domain insight can search for unintended outcomes inside procedural, legal, economic, or algorithmic frameworks.</p>
+    </div>
+    <a href="/posts/ahackersmind/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
   </div>
 </div>
 

@@ -70,7 +70,7 @@
   <meta itemprop="description" content="A complete guide to SHAP values — how they work, why they matter, and how to implement them in practice for model interpretability.">
   <meta itemprop="datePublished" content="2025-10-19T00:00:00+00:00">
   <meta itemprop="dateModified" content="2025-10-19T00:00:00+00:00">
-  <meta itemprop="wordCount" content="2223">
+  <meta itemprop="wordCount" content="2241">
   <meta itemprop="keywords" content="Explainable-Ai,Shap,Machine-Learning,Model-Interpretability">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Understanding SHAP Values: From Theory to Implementation">
@@ -144,7 +144,7 @@
 </ul>
 <p>SHAP provides a <strong>unified and theoretically sound</strong> way to measure feature contributions for any prediction.</p>
 <hr>
-<h2 id="2-the-game-theory-behind-shap">2. The Game Theory Behind SHAP</h2>
+<h2 id="2-the-game-theory-behind-shap-math---skip-to-section-5-if-you-rather-inspect-a-more-practical-approach-to-this-technique">2. The Game Theory Behind SHAP (MATH - Skip to section 5 if you rather inspect a more practical approach to this technique)</h2>
 <h3 id="21-shapley-values">2.1 Shapley Values</h3>
 <p>In cooperative game theory, the <strong>Shapley value</strong> distributes a total &ldquo;payout&rdquo; fairly among players according to their contributions. Formally, for a set of players \( N = \{1, 2, ..., n\} \) and a value function \( v(S) \) representing the payout for a coalition \( S \subseteq N \):</p>
 $$
@@ -221,7 +221,7 @@ f(x) = \phi_0 + \sum_{i=1}^{M} \phi_i
       </tr>
   </tbody>
 </table>
-<h2 id="-case-study-understanding-recidivism-risk-with-shap">⚖️ Case Study: Understanding Recidivism Risk with SHAP</h2>
+<h2 id="5-case-study-understanding-recidivism-risk-with-shap">5 Case Study: Understanding Recidivism Risk with SHAP</h2>
 <p>TreeSHAP efficiently distributes credit along tree paths, caching intermediate results to avoid exponential computation.</p>
 <h3 id="-scenario">🔍 Scenario</h3>
 <p>Malik Johnson, a 27-year-old with one prior felony, was flagged as <strong>low risk</strong> by an AI risk assessment tool and granted parole. Some community stakeholders have questioned whether this classification was appropriate.</p>
@@ -491,11 +491,11 @@ Juvenile history matters less than adult criminal history</p>
 <li><strong>Consistency:</strong> SHAP’s additive property ensures all contributions sum to the predicted outcome.</li>
 <li><strong>Stakeholder insight:</strong> Community members or policymakers can see <strong>why the model made this decision</strong>, which helps evaluate fairness and potential bias.</li>
 </ul>
-<h3 id="5-practical-tips">5. Practical Tips</h3>
+<h3 id="6-practical-tips">6. Practical Tips</h3>
 <p>Global vs Local explanations: Use summary plots for global insights and force_plot for individual predictions.</p>
 <p>Handling correlated features: Shapley values assume feature independence. Consider techniques like shap.dependence_plot to detect interactions.</p>
 <p>Performance: For very large datasets, consider sampling or using approximate=True in TreeSHAP.</p>
-<h3 id="conclusion">Conclusion</h3>
+<h3 id="7-conclusion">7. Conclusion</h3>
 <p>SHAP bridges the gap between complex models and human interpretability, offering a mathematically principled way to explain predictions. Whether for compliance, debugging, or trust-building, SHAP equips data scientists with actionable insight into how features drive model behavior.</p>
 <p>By mastering SHAP, you not only make your models transparent but also gain the power to communicate their decisions clearly.</p>
 <blockquote>
